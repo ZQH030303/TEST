@@ -1,7 +1,6 @@
-package TEST;
+package test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 class Element{
     int number;
