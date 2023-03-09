@@ -1,69 +1,62 @@
 package test;
-import java.util.ArrayList;
-import java.util.Scanner;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TEST {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n, m, m1, j;
-        n = sc.nextInt();
-        m = sc.nextInt();
-        m1 = m;
-        ArrayList<Element> list = new ArrayList<>();
-        sc.nextLine();
-        int number2 = 0;
-        int notePointNumber = -1;
-        for (int k = 0; k < n; k++) {
-            String s;
-            int pointNumber = 0;
-            int number = k + 1;
-            s = sc.nextLine();
-            for (j = 0; j < s.length(); j++) {
-                char ch = s.charAt(j);
-                if (ch == '.') {
-                    pointNumber++;
-                }
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class TEST extends JFrame {
+    public TEST() {
+        setBounds(100, 100, 500, 300);// 设置窗体的位置及大小
+        setDefaultCloseOperation(EXIT_ON_CLOSE);// 设置窗体的关闭方式
+
+        Container c = getContentPane();// 获取窗体容器
+        c.setLayout(new GridLayout(3, 2, 5, 5));// 设置布局为网格布局，三行两列，水平间距为5，垂直间距也为5
+
+        JButton btn[] = new JButton[6];
+        for (int i = 0; i < btn.length; i++) {
+            btn[i] = new JButton();
+            c.add(btn[i]);
+        }
+
+        btn[0].setText("不可点击");// 设置按钮文本
+        btn[0].setEnabled(false);// 设置按钮为不可用
+
+        btn[1].setText("有背景色");// 设置按钮文本
+        btn[1].setBackground(Color.GREEN);// 设置按钮背景颜色
+
+        btn[2].setText("没有边框");// 设置按钮文本
+        btn[2].setBorderPainted(false);// 设值按钮无边框
+
+        btn[3].setText("自定义边框");// 设置按钮文本
+        btn[3].setBorder(BorderFactory.createLineBorder(Color.RED, 5));// 设置边框颜色和粗细
+
+        Icon icon = new ImageIcon("images/Background.png");// 获取图片对象
+        btn[4].setIcon(icon);// 设置按钮图片
+        btn[4].setToolTipText("中国·绵阳·越王楼");// 鼠标悬停提示
+
+        btn[5].setText("可触发事件");// 设置按钮文本
+        btn[5].addActionListener(new ActionListener() {// (添加事件监听)添加一个ActionListener的匿名内部类
+            public void actionPerformed(ActionEvent e) {// 监听出发的方法
+                JOptionPane.showMessageDialog(TEST.this, "当前按钮已经被点击"); // 弹出一个小对话框
             }
-            if(pointNumber > notePointNumber){
-                number2 += 1;
-            }
-            else if(pointNumber < notePointNumber){
-                number2 -= 200;
-            }
-            String[] s2 = s.split("\\.");
-            String s3 = "";
-            for (j = 0; j < s2.length; j++) {
-                s3 += s2[j];
-            }
-            String[] s4 = s3.split(" ");
-            String name = s4[0];
-            String id = "%";
-            name = name.toLowerCase();
-            if (s4.length == 2) {
-                id = s4[1];
-            }
-            System.out.println(name + " " + id);
-            Element e = new Element(number,number2,pointNumber, name, id);
-            list.add(e);
-        }
-        for (int k = 0; k < list.size(); k++) {
-            System.out.println(list.get(k).getName());
-        }
-        ArrayList<Element> list2 = new ArrayList<>();
-        for(int k = 0; k < list.size(); k++){
-            Element e = new Element(list.get(k));
-            list2.add(e);
-        }
-        list2.get(2).name = "zqh";
-        for (int k = 0; k < list2.size(); k++) {
-            list2.get(k).name = "zqh";
-        }
-        for (int k = 0; k < list2.size(); k++) {
-            System.out.println(list2.get(k).getName());
-        }
-        for (int k = 0; k < list.size(); k++) {
-            System.out.println(list.get(k).getName());
-        }
+        });
+
+        setVisible(true);// 设置窗体为可见
     }
+
+    public static void main(String[] args) {
+
+        new TEST();
+
+    }
+
 }

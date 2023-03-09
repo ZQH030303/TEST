@@ -1,6 +1,5 @@
 package test2;
 
-
 import java.util.LinkedList;
 import java.util.Scanner;
 
